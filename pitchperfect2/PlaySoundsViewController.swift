@@ -11,17 +11,27 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
     
-    //create URL for filepath
-    var audioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3")!)
-    var audioPlayer = AVAudioPlayer()
-    
+    // create global object variable to invoke AVAudioPlayer
+    var audioPlayer:AVAudioPlayer!
+    // created global object variable for the user recording
+    var receivedAudio:RecordedAudio!
+    // create global object variable for the audio engine (effect playback)
+    var audioEngine:AVAudioEngine!
+    // create global object variable for AVAudioFile (needed to run effect playback)
+    var audioFile:AVAudioFile!
+
     @IBOutlet weak var stopPlaybackButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        audioPlayer = AVAudioPlayer(contentsOfURL: audioURL, error: nil)
+        // load audio player as instance of AVAudio player and point to the user recording
+        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
+        // enables rate to manipulate for fast and slow playback
         audioPlayer.enableRate = true
-        // Do any additional setup after loading the view.
+        // load audioEngine as an instance of AVAudioEngine
+        audioEngine = AVAudioEngine()
+        // load audioFile as an instance of AVAudioFile, pass in user recording
+        audioFile = AVAudioFile(forReading: receivedAudio.filePathURL, error: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,6 +57,41 @@ class PlaySoundsViewController: UIViewController {
 
     @IBAction func playFast(sender: UIButton) {
         playerFunc(1.5, audioSpeed: "fast")
+    }
+    
+    @IBAction func playChipmunk(sender: UIButton) {
+        playAudioWithVariablePitch(1500, effect: "chipmunk")
+    }
+    
+    @IBAction func playVader(sender: UIButton) {
+        playAudioWithVariablePitch(-1200, effect:"vader")
+    }
+    func playAudioWithVariablePitch(pitch: Float, effect: String){
+        // stop all playback before applying effect
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        // attach player node to audioEngine
+        var audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        // instantiate pitch effect and attach to audioEngine
+        var changePitchEffect = AVAudioUnitTimePitch()
+        changePitchEffect.pitch = pitch
+        audioEngine.attachNode(changePitchEffect)
+        
+        // connect audio player node to pitch effect in engine
+        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format:nil)
+        // connect pitch effect to the device output
+        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format:nil)
+        // this step required use of AVAudioFile class, see above
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        //play the file
+        audioEngine.startAndReturnError(nil)
+        audioPlayerNode.play()
+        
+        println(effect, " playback")
     }
     
     @IBAction func stopPlayback(sender: UIButton) {

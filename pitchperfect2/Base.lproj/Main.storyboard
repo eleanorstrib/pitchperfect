@@ -8,7 +8,7 @@
         <!--record-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="record" id="vXZ-lx-hvc" customClass="ViewController" customModule="pitchperfect2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="record" id="vXZ-lx-hvc" customClass="RecordSoundsViewController" customModule="pitchperfect2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -39,7 +39,6 @@
                                 </state>
                                 <connections>
                                     <action selector="stopButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7AO-kf-Mfi"/>
-                                    <segue destination="cZW-3c-MBd" kind="show" id="DAc-4H-3Bw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -65,6 +64,7 @@
                         <outlet property="recordButton" destination="N5I-hY-LUF" id="rxd-BG-5X2"/>
                         <outlet property="recordingInProgress" destination="dji-o4-xcu" id="8nf-Md-CJs"/>
                         <outlet property="stopRecord" destination="C32-Oc-DyS" id="lJG-dB-ABk"/>
+                        <segue destination="cZW-3c-MBd" kind="show" identifier="nextScreen" id="NP4-Ru-Smr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -101,15 +101,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ES-tq-oyl">
-                                <rect key="frame" x="42" y="98" width="100" height="100"/>
-                                <state key="normal" image="speedSlow">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playSlow:" destination="cZW-3c-MBd" eventType="touchUpInside" id="4B5-34-KeB"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwC-yA-mhm">
                                 <rect key="frame" x="458" y="98" width="100" height="100"/>
                                 <state key="normal" image="speedFast">
@@ -128,6 +119,33 @@
                                     <action selector="stopPlayback:" destination="cZW-3c-MBd" eventType="touchUpInside" id="fxb-J5-tYs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbG-XO-lK0">
+                                <rect key="frame" x="42" y="238" width="100" height="100"/>
+                                <state key="normal" image="effect_cm">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playChipmunk:" destination="cZW-3c-MBd" eventType="touchUpInside" id="pSM-qI-98F"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBt-2P-bz6">
+                                <rect key="frame" x="458" y="238" width="100" height="100"/>
+                                <state key="normal" image="effect_dv">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playVader:" destination="cZW-3c-MBd" eventType="touchUpInside" id="bRS-GJ-bgC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ES-tq-oyl">
+                                <rect key="frame" x="42" y="98" width="100" height="100"/>
+                                <state key="normal" image="speedSlow">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSlow:" destination="cZW-3c-MBd" eventType="touchUpInside" id="4B5-34-KeB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -135,8 +153,13 @@
                             <constraint firstItem="0ES-tq-oyl" firstAttribute="leading" secondItem="YZ6-Sw-i0i" secondAttribute="leadingMargin" constant="26" id="1Er-gA-b2y"/>
                             <constraint firstItem="0ES-tq-oyl" firstAttribute="top" secondItem="MMp-U8-eNO" secondAttribute="bottom" constant="34" id="2UP-JN-COO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WwC-yA-mhm" secondAttribute="trailing" constant="26" id="46h-sR-J8E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yBt-2P-bz6" secondAttribute="trailing" constant="26" id="8PH-1F-zTl"/>
                             <constraint firstItem="pYb-Lw-HXe" firstAttribute="top" secondItem="phU-YI-CEb" secondAttribute="bottom" constant="8" id="NhQ-vT-dXv"/>
+                            <constraint firstItem="hbG-XO-lK0" firstAttribute="leading" secondItem="YZ6-Sw-i0i" secondAttribute="leadingMargin" constant="26" id="ReG-KU-fuu"/>
+                            <constraint firstItem="yBt-2P-bz6" firstAttribute="top" secondItem="WwC-yA-mhm" secondAttribute="bottom" constant="40" id="T7g-rL-69F"/>
+                            <constraint firstItem="hbG-XO-lK0" firstAttribute="top" secondItem="0ES-tq-oyl" secondAttribute="bottom" constant="40" id="YYJ-GW-ljA"/>
                             <constraint firstAttribute="centerY" secondItem="phU-YI-CEb" secondAttribute="centerY" constant="-242" id="h7p-wF-OIz"/>
+                            <constraint firstItem="hbG-XO-lK0" firstAttribute="height" secondItem="0ES-tq-oyl" secondAttribute="height" id="qDF-bg-TgT"/>
                             <constraint firstItem="0ES-tq-oyl" firstAttribute="top" secondItem="MMp-U8-eNO" secondAttribute="bottom" constant="54" id="w6b-HC-Ymy"/>
                             <constraint firstItem="0ES-tq-oyl" firstAttribute="leading" secondItem="YZ6-Sw-i0i" secondAttribute="leadingMargin" constant="112" id="xjx-dA-NAN"/>
                             <constraint firstAttribute="centerX" secondItem="phU-YI-CEb" secondAttribute="centerX" id="zul-nT-htk"/>
@@ -155,10 +178,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BDW-6R-k5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1522" y="998"/>
+            <point key="canvasLocation" x="2204" y="293"/>
         </scene>
     </scenes>
     <resources>
+        <image name="effect_cm" width="100" height="100"/>
+        <image name="effect_dv" width="100" height="100"/>
         <image name="mic" width="100" height="100"/>
         <image name="speedFast" width="100" height="100"/>
         <image name="speedSlow" width="100" height="100"/>
