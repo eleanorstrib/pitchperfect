@@ -40,7 +40,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordingInProgress.hidden = false
         stopRecord.hidden = false
         recordButton.enabled = false
-        println("in record audio")
         // record user's voice
         // create a variable that points to a string for the documents directory for this app
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
@@ -64,7 +63,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
-        //TODO: remove print debug statement
         println("recording!")
     }
     
@@ -74,12 +72,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             // save recorded audio
             //TODO: remove print debug statement
             println("saving recorded audio!")
-            recordedAudio = RecordedAudio()
-            println(recordedAudio)
-            recordedAudio.filePathURL = recorder.url
-            println(recordedAudio.filePathURL)
+            recordedAudio = RecordedAudio(filePathURL:recorder.url, fileName: "user_recording.wav")
             recordedAudio.fileName = recorder.url.lastPathComponent
-            println(recordedAudio.fileName)
             println("recording successful")
             // make segue
             self.performSegueWithIdentifier("nextScreen", sender:recordedAudio)

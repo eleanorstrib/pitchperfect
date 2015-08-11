@@ -40,7 +40,6 @@ class PlaySoundsViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func playerFunc(audioRate: Float, audioSpeed: String) {
