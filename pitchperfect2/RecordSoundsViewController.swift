@@ -13,6 +13,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopRecord: UIButton!
+    @IBOutlet weak var recordInstruction: UILabel!
     
     var audioRecorder:AVAudioRecorder!
     var recordedAudio:RecordedAudio!
@@ -24,6 +25,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewWillAppear(animated: Bool) {
         recordButton.enabled = true
         stopRecord.hidden = true
+        recordInstruction.hidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +36,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func recordAudio(sender: UIButton) {
         // show text saying recording in progress and stop button and
         // disable the mic button as soon as it is tapped
+        recordInstruction.hidden = true
         recordingInProgress.hidden = false
         stopRecord.hidden = false
         recordButton.enabled = false
@@ -41,7 +44,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // record user's voice
         // create a variable that points to a string for the documents directory for this app
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
-            .UserDomainMask, true)[0] as String
+            .UserDomainMask, true)[0] as! String
         
         // create recording as a wav file, overwrite each time
         let recordingName = "user_recording.wav"
@@ -87,8 +90,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "nextScreen") {
-            let playSoundsVC = segue.destinationViewController as PlaySoundsViewController
-            let data = sender as RecordedAudio
+            let playSoundsVC = segue.destinationViewController as! PlaySoundsViewController
+            let data = sender as! RecordedAudio
             playSoundsVC.receivedAudio = data
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aFo-WI-ceX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aFo-WI-ceX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -41,12 +41,20 @@
                                     <action selector="stopButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7AO-kf-Mfi"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tap to record" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jda-a8-Xsf">
+                                <rect key="frame" x="252" y="358" width="99" height="21"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <color key="textColor" red="0.31257891409999999" green="0.31257891409999999" blue="0.31257891409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dji-o4-xcu" firstAttribute="top" secondItem="N5I-hY-LUF" secondAttribute="bottom" constant="8" id="BjV-9k-Bhl"/>
+                            <constraint firstAttribute="centerX" secondItem="jda-a8-Xsf" secondAttribute="centerX" constant="-1.5" id="HVX-fl-EN6"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="C32-Oc-DyS" secondAttribute="bottom" constant="8" id="YAn-cP-HYD"/>
                             <constraint firstAttribute="centerX" secondItem="dji-o4-xcu" secondAttribute="centerX" constant="-0.5" id="a84-FF-mcb"/>
+                            <constraint firstItem="jda-a8-Xsf" firstAttribute="top" secondItem="N5I-hY-LUF" secondAttribute="bottom" constant="8" id="ail-Iu-3ue"/>
                             <constraint firstAttribute="centerX" secondItem="C32-Oc-DyS" secondAttribute="centerX" id="bfb-Dd-l7a"/>
                             <constraint firstAttribute="centerX" secondItem="N5I-hY-LUF" secondAttribute="centerX" constant="-0.5" id="cHi-JQ-Frc"/>
                             <constraint firstItem="C32-Oc-DyS" firstAttribute="top" secondItem="dji-o4-xcu" secondAttribute="bottom" constant="171" id="lBe-0k-Gw1"/>
@@ -62,6 +70,7 @@
                     <navigationItem key="navigationItem" title="record" id="r1t-fW-Iaw"/>
                     <connections>
                         <outlet property="recordButton" destination="N5I-hY-LUF" id="rxd-BG-5X2"/>
+                        <outlet property="recordInstruction" destination="jda-a8-Xsf" id="8fg-Kq-vmV"/>
                         <outlet property="recordingInProgress" destination="dji-o4-xcu" id="8nf-Md-CJs"/>
                         <outlet property="stopRecord" destination="C32-Oc-DyS" id="lJG-dB-ABk"/>
                         <segue destination="cZW-3c-MBd" kind="show" identifier="nextScreen" id="NP4-Ru-Smr"/>

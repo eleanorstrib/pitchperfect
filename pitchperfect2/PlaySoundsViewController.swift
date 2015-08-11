@@ -45,6 +45,8 @@ class PlaySoundsViewController: UIViewController {
     
     func playerFunc(audioRate: Float, audioSpeed: String) {
         audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
         audioPlayer.rate = audioRate
         audioPlayer.play()
         stopPlaybackButton.hidden = false
