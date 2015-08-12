@@ -68,8 +68,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         println("here")
         if(flag){
             // save recorded audio
-            recordedAudio = RecordedAudio(filePathURL:recorder.url, fileName: "user_recording.wav")
-            recordedAudio.fileName = recorder.url.lastPathComponent
+            recordedAudio = RecordedAudio(filePathURL:recorder.url, fileTitle: "user_recording.wav", fileName: recorder.url.lastPathComponent!)
             println("recording successful")
             // make segue
             self.performSegueWithIdentifier("nextScreen", sender:recordedAudio)

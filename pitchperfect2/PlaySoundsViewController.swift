@@ -11,13 +11,11 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
     
-    // create global object variable to invoke AVAudioPlayer
     var audioPlayer:AVAudioPlayer!
-    // created global object variable for the user recording
+    // for user recording
     var receivedAudio:RecordedAudio!
-    // create global object variable for the audio engine (effect playback)
+    // for effect playback
     var audioEngine:AVAudioEngine!
-    // create global object variable for AVAudioFile (needed to run effect playback)
     var audioFile:AVAudioFile!
 
     @IBOutlet weak var stopPlaybackButton: UIButton!
@@ -42,16 +40,35 @@ class PlaySoundsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // this section contains functions that handle stopping
+    // audio and hiding the stop button
+    // will add function for controls if additional ones added
+    // e.g. pause, rewind
+    
+    func stopAudio(){
+        //this function stops all audio
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+    }
+    
+    @IBAction func stopPlayback(sender:UIButton) {
+        // stops all audio, hides button
+        stopAudio()
+        stopPlaybackButton.hidden = true
+    }
+    
     // this section controls the player for the rate effects
     // (snail and rabbit in UI)
     func playAudioWithVariableRate(audioRate: Float) {
-        // stop the audio and change the rate
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAudio()
+        
+        // change the rate on the audio
+        audioPlayer.currentTime = 0.0
         audioPlayer.rate = audioRate
-        // play the sound
+
         audioPlayer.play()
-        //show stop button as soon as sound begins to play
+        
         stopPlaybackButton.hidden = false
     }
     
@@ -67,12 +84,7 @@ class PlaySoundsViewController: UIViewController {
     // (chipmunk and Darth Vader in UI)
     
     func playAudioWithVariablePitch(pitch: Float){
-        // stop all playback before applying effect
-        // audioPlayer command needed here to stop rate and pitch 
-        // effects from running over each other
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAudio()
         
         // attach player node to audioEngine
         var audioPlayerNode = AVAudioPlayerNode()
@@ -89,11 +101,10 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format:nil)
         // this step required use of AVAudioFile class, see above
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        //play the file
         audioEngine.startAndReturnError(nil)
+        
         audioPlayerNode.play()
         
-        //show stop button
         stopPlaybackButton.hidden = false
     }
     
@@ -103,14 +114,6 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func playVader(sender: UIButton) {
         playAudioWithVariablePitch(-1200)
-    }
-
-    
-    @IBAction func stopPlayback(sender: UIButton) {
-        //stopping audioEngine, hiding button
-        audioEngine.stop()
-        audioEngine.reset()
-        stopPlaybackButton.hidden = true
     }
 
 }
