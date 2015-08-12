@@ -42,33 +42,34 @@ class PlaySoundsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func playerFunc(audioRate: Float, audioSpeed: String) {
-        audioPlayer.stop()
+    // this section controls the player for the rate effects
+    // (snail and rabbit in UI)
+    func playAudioWithVariableRate(audioRate: Float) {
+        // stop the audio and change the rate
         audioEngine.stop()
         audioEngine.reset()
         audioPlayer.rate = audioRate
+        // play the sound
         audioPlayer.play()
+        //show stop button as soon as sound begins to play
         stopPlaybackButton.hidden = false
-        println("playing audio " + audioSpeed)
     }
     
     @IBAction func playSlow(sender: UIButton) {
-        playerFunc(0.5, audioSpeed:"slow")
+        playAudioWithVariableRate(0.5)
     }
 
     @IBAction func playFast(sender: UIButton) {
-        playerFunc(1.5, audioSpeed: "fast")
+        playAudioWithVariableRate(1.5)
     }
     
-    @IBAction func playChipmunk(sender: UIButton) {
-        playAudioWithVariablePitch(1500, effect: "chipmunk")
-    }
+    // this section controls the player for the pitch effects
+    // (chipmunk and Darth Vader in UI)
     
-    @IBAction func playVader(sender: UIButton) {
-        playAudioWithVariablePitch(-1200, effect:"vader")
-    }
-    func playAudioWithVariablePitch(pitch: Float, effect: String){
+    func playAudioWithVariablePitch(pitch: Float){
         // stop all playback before applying effect
+        // audioPlayer command needed here to stop rate and pitch 
+        // effects from running over each other
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
@@ -92,23 +93,24 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.startAndReturnError(nil)
         audioPlayerNode.play()
         
-        println(effect, " playback")
+        //show stop button
+        stopPlaybackButton.hidden = false
     }
+    
+    @IBAction func playChipmunk(sender: UIButton) {
+        playAudioWithVariablePitch(1500)
+    }
+    
+    @IBAction func playVader(sender: UIButton) {
+        playAudioWithVariablePitch(-1200)
+    }
+
     
     @IBAction func stopPlayback(sender: UIButton) {
-        audioPlayer.stop()
-        println("stopping audio")
+        //stopping audioEngine, hiding button
+        audioEngine.stop()
+        audioEngine.reset()
         stopPlaybackButton.hidden = true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B64E71BC-9FCF-4D19-A1F3-7B96DE567506</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>pitchperfect2</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0BFE4FE113990E6B1F055A2877CCD24BF4B46B6A</key>
 		<string>https://github.com/eleanorstrib/pitchperfect.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>pitchperfect2.xcodeproj/project.xcworkspace</string>
+	<string>pitchperfect2.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0BFE4FE113990E6B1F055A2877CCD24BF4B46B6A</key>

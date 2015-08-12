@@ -51,7 +51,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let pathArray = [dirPath, recordingName]
         //convert array into URL, print to verify
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
-        println(filePath)
         
         // create audio session
         var session = AVAudioSession.sharedInstance()
@@ -63,15 +62,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
-        println("recording!")
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         println("here")
         if(flag){
             // save recorded audio
-            //TODO: remove print debug statement
-            println("saving recorded audio!")
             recordedAudio = RecordedAudio(filePathURL:recorder.url, fileName: "user_recording.wav")
             recordedAudio.fileName = recorder.url.lastPathComponent
             println("recording successful")
